@@ -13,7 +13,7 @@ const ClientCompletion = () => {
     <div className="client-status-container">
       {data.map(info => {
         return (
-          <div className="client-status">
+          <div key={info.title} className="client-status">
             <p className="client-status-title">{info.title}</p>
             <span className="client-status-info">{info.info}</span>
           </div>

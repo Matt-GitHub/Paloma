@@ -26,7 +26,6 @@ const AudienceForm = ({ setAddClients }) => {
   const handleSubmit = (e, values) => {
     e.preventDefault();
     createAudience(values);
-    console.log('reset');
     setAudience({
       first_name: '',
       last_name: '',

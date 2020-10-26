@@ -29,7 +29,7 @@ const Tags = ({ viewClient }) => {
           ? 'error fetching tags'
           : tagsD.data.tag.map(info => {
               return (
-                <div onDoubleClick={() => handleDelete(info.id)}>
+                <div key={info.id} onDoubleClick={() => handleDelete(info.id)}>
                   <p className="client-tag-info">{info.tag}</p>
                 </div>
               );

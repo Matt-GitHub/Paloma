@@ -10,7 +10,6 @@ import useAudienceData from './AudienceData';
 const ViewClients = ({ viewClient, setViewClients }) => {
   const copyText = async () => {
     let target = await navigator.clipboard.writeText(viewClient.email);
-    alert('email copied');
     return target;
   };
 
@@ -30,11 +29,10 @@ const ViewClients = ({ viewClient, setViewClients }) => {
   };
 
   const clientData = useAudienceData();
-  console.log('check this out', clientData?.data?.audience);
   const clientDetails = clientData?.data?.audience.filter(
     info => info.id == viewClient.id
   );
-  console.log('client info waldo', clientDetails);
+
   return (
     <div>
       <div className="client-options-container">

@@ -7,10 +7,6 @@ async function getId(id) {
 }
 
 function useTagData(props) {
-  console.log('props', props);
-  // let id = getId(props.id);
-  // console.log('id', id);
-
   return useQuery('tag data', () => {
     return axios
       .get(`http://localhost:8500/api/tags/${props}`, {

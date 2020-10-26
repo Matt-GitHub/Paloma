@@ -4,9 +4,6 @@ import Axios from 'axios';
 import useAudienceData from '../AudienceData';
 
 const ClientForm = ({ viewClient, setViewClients }) => {
-  const clientData = useAudienceData();
-  // const findClient = clientData?.data?.audience.filter(id => id == viewClient.id)
-
   const [createAudience, createAudienceInfo] = useMutation(
     values =>
       Axios.put(`http://localhost:8500/api/audience/${viewClient.id}`, values, {
@@ -31,7 +28,6 @@ const ClientForm = ({ viewClient, setViewClients }) => {
   const handleSubmit = (e, values) => {
     e.preventDefault();
     createAudience(values);
-    alert('Updated Client Information');
   };
 
   const handleChanges = e => {
@@ -85,9 +81,6 @@ const ClientForm = ({ viewClient, setViewClients }) => {
             value={audience.location}
             onChange={handleChanges}
           />
-          {/* <button type="submit" className="form-button" id="submit">
-            Edit Client
-          </button> */}
         </div>
       </form>
     </div>

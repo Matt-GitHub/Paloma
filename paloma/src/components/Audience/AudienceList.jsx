@@ -12,7 +12,7 @@ const AudienceList = ({ setAddClients, setViewClients }) => {
           ? 'Error loading'
           : clientData.data.audience.map(data => {
               return (
-                <div className="list-box">
+                <div key={data.id} className="list-box">
                   <div className="list-container">
                     <p className="list-item">
                       <span className="list-item-desc">First Name:</span>{' '}

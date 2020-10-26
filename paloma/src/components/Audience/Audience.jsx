@@ -6,7 +6,6 @@ import ViewClients from './ViewClients';
 const Audience = () => {
   const [addClients, setAddClients] = React.useState(false);
   const [viewClient, setViewClients] = React.useState(null);
-  console.log('view', viewClient);
   return (
     <div>
       <h2 className="audience-title">Manage Audience</h2>
