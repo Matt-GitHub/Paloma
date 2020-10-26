@@ -11,6 +11,8 @@
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "react-hook-form": "^6.9.5",
+    "react-query": "^2.25.2",
+    "react-query-devtools": "^2.6.0",
     "react-redux": "^7.2.1",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",

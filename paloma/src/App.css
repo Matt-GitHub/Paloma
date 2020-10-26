@@ -66,10 +66,33 @@
   display: flex;
   width: 80%;
   margin: 10% auto;
+  color: white;
+  text-decoration: none;
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  transform: scale(1);
+  transition-timing-function: ease-in;
+  -webkit-transition: all 0.6s;
+  -moz-transition: all 0.6s;
+  transition: all 0.6s;
 }
 
-#dashboard-li-active {
+.dashboard-li:hover {
+  background-color: rgb(112, 142, 167);
+  padding: 4%;
+  border-radius: 5px;
+}
+
+.dashboard-li-active {
   background-color: rgb(62, 94, 120);
   padding: 4%;
   border-radius: 5px;
+}
+
+#log-out {
+  position: absolute;
+  bottom: 1%;
+  width: 10%;
+  color: black;
+  background: white;
 }

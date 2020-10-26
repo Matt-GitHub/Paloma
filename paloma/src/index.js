@@ -3,25 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-// redux
-import { createStore, applyMiddleware, compose } from 'redux';
-import { Provider } from 'react-redux';
-import thunk from 'redux-thunk';
-import logger from 'redux-logger';
-// imports for redux setup
-import { reducer } from './reducers';
-
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(
-  reducer,
-  composeEnhancers(applyMiddleware(thunk, logger))
-);
+import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
+    <BrowserRouter>
       <App />
-    </Provider>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );

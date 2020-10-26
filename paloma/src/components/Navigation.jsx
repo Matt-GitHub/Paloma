@@ -1,36 +1,52 @@
 import React, { Component } from 'react';
+import { NavLink, useHistory } from 'react-router-dom';
+import '../App.css';
 
-class Navigation extends Component {
-  render() {
-    const links = [
-      'Dashboard',
-      'Acquisition',
-      'Campaigns',
-      'Global',
-      'Audience',
-      'Configuration'
-    ];
-    return (
-      <div className="dashboard">
-        <h1 className="dashboard-title">Paloma</h1>
-        <nav>
-          <ul className="dashboard-ul">
+const Navigation = () => {
+  const links = [
+    'Dashboard',
+    'Acquisition',
+    'Campaigns',
+    'Global',
+    'Audience',
+    'Configuration'
+  ];
+
+  const history = useHistory();
+  return (
+    <div className="dashboard">
+      <h1 className="dashboard-title">Paloma</h1>
+      <nav>
+        <ul className="dashboard-ul">
+          <li>
             {links.map(link => {
               return (
-                <li
+                <NavLink
+                  to={`/app/${link}`}
                   className="dashboard-li"
+                  activeClassName="dashboard-li-active"
                   key={link}
-                  id={link === 'Audience' ? 'dashboard-li-active' : null}
                 >
                   {link}
-                </li>
+                </NavLink>
               );
             })}
-          </ul>
-        </nav>
-      </div>
-    );
-  }
-}
+          </li>
+        </ul>
+      </nav>
+      <button
+        className="form-button"
+        id="log-out"
+        onClick={() => {
+          localStorage.removeItem('AUTH_TOKEN');
+          localStorage.removeItem('USER_ID');
+          history.push('/');
+        }}
+      >
+        Log Out
+      </button>
+    </div>
+  );
+};
 
 export default Navigation;

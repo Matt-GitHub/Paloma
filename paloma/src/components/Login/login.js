@@ -4,11 +4,17 @@ import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { BASE_API_URL } from '../../utils/baseAuth';
-
+import './login.css';
 //Yup form validation
 const FormSchema = yup.object().shape({
-  email: yup.string().required('Please enter an email for your account.'),
-  password: yup.string().required('Please make sure to enter a password.')
+  email: yup
+    .string()
+    .email()
+    .required('Please enter an email for your account.'),
+  password: yup
+    .string()
+    .min(4)
+    .required('Please make sure to enter a password.')
 });
 
 const LoginForm = () => {
@@ -30,7 +36,7 @@ const LoginForm = () => {
         console.log('response', res);
         localStorage.setItem('AUTH_TOKEN', res.data.token);
         localStorage.setItem('USER_ID', res.data.user.id);
-        // history.push('/app');
+        history.push('/app/dashboard');
         console.log('success');
       })
       .catch(err => {
@@ -40,7 +46,6 @@ const LoginForm = () => {
   };
 
   const onRegisterSubmit = data => {
-    console.log('Register button! ', data);
     axios
       .post('http://localhost:8500/api/register', {
         email: data.email,
@@ -48,7 +53,6 @@ const LoginForm = () => {
       })
       .then(res => {
         console.log('Registration successful:', res.data);
-        // registration includes token to login --> tasks page
         onLoginSubmit(data);
       })
       .catch(err => {
@@ -59,29 +63,32 @@ const LoginForm = () => {
 
   // routerHistory
   const history = useHistory();
-
   return (
-    <form onSubmit={handleSubmit(onLoginSubmit)}>
-      <h1>Sign in to continue.</h1>
-
-      <div>
+    <form onSubmit={handleSubmit(onLoginSubmit)} className="form-container">
+      <div className="form-input">
         <input placeholder="Email" type="email" name="email" ref={register} />
-        {errors.email && <p>{errors.email.message}</p>}
       </div>
 
-      <div>
+      <div className="form-input">
         <input
           placeholder="Password"
           type="password"
           name="password"
           ref={register}
         />
-        {errors.password && <p>{errors.password.message}</p>}
       </div>
 
       <div>
-        <button type="submit">Sign In</button>
-        <button onClick={handleSubmit(onRegisterSubmit)}>Register</button>
+        <button type="submit" className="form-button" id="submit">
+          Sign In
+        </button>
+        <button
+          onClick={handleSubmit(onRegisterSubmit)}
+          className="form-button"
+          id="register"
+        >
+          Register
+        </button>
       </div>
     </form>
   );

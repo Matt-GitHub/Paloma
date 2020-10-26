@@ -1,163 +1,27 @@
 import React from 'react';
-
+import AudienceList from './AudienceList';
+import './Audience.css';
+import AudienceForm from './AudienceForm';
+import ViewClients from './ViewClients';
 const Audience = () => {
-  const [audience, setAudience] = React.useState([
-    {
-      email: 'test',
-      number: '555',
-      first_name: 'a',
-      last_name: 'b',
-      id: Date.now()
-    }
-  ]);
-  const [client, setClient] = React.useState({
-    email: '',
-    number: '',
-    first_name: '',
-    last_name: '',
-    id: Date.now()
-  });
-
-  const [create, setCreate] = React.useState(false);
-
-  const [view, setView] = React.useState(null);
-  function handleChanges(e) {
-    setClient({ ...client, [e.target.name]: e.target.value });
-  }
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    setAudience([...audience, client]);
-    setClient({
-      email: '',
-      number: '',
-      first_name: '',
-      last_name: '',
-      id: Date.now()
-    });
-    setCreate(false);
-  }
-
-  const [edit, setEditing] = React.useState(false);
-
-  function editClient(data) {
-    setEditing(true);
-    setClient(data);
-  }
-
-  function deleteClient(data) {
-    let toRemove = data.id;
-    let newAudience = [];
-    audience.map(info => {
-      if (info.id !== toRemove) {
-        newAudience.push(info);
-      }
-    });
-    setAudience(newAudience);
-    setView(null);
-  }
-
-  React.useEffect(() => {}, [audience]);
-
+  const [addClients, setAddClients] = React.useState(false);
+  const [viewClient, setViewClients] = React.useState(null);
+  console.log('view', viewClient);
   return (
     <div>
-      <h2>Manage Audience</h2>
-      {create === true ? (
-        <button
-          onClick={() => {
-            setCreate(false);
-            setClient({
-              email: '',
-              number: '',
-              first_name: '',
-              last_name: '',
-              id: Date.now()
-            });
-          }}
-        >
-          Cancel
-        </button>
+      <h2 className="audience-title">Manage Audience</h2>
+      {addClients == false && viewClient == null ? (
+        <AudienceList
+          setAddClients={setAddClients}
+          setViewClients={setViewClients}
+        />
+      ) : addClients == true ? (
+        <AudienceForm
+          setAddClients={setAddClients}
+          setViewClients={setViewClients}
+        />
       ) : (
-        <button onClick={() => setCreate(!create)}>Add Client</button>
-      )}
-      {create === true ? (
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            name="email"
-            value={client.email}
-            onChange={handleChanges}
-          />
-          <input
-            type="text"
-            name="number"
-            value={client.number}
-            onChange={handleChanges}
-          />
-          <input
-            type="text"
-            name="first_name"
-            value={client.first_name}
-            onChange={handleChanges}
-          />
-          <input
-            type="text"
-            name="last_name"
-            value={client.last_name}
-            onChange={handleChanges}
-          />
-          <button type="submit">Add Client</button>
-        </form>
-      ) : null}
-      {audience.map(data => {
-        console.log('data', data);
-        return (
-          <div>
-            <p key={data}>{data.email}</p>
-            <button onClick={() => setView(data)}>View Info</button>
-          </div>
-        );
-      })}
-
-      <h3>Client Details</h3>
-      {view == null ? (
-        'Please select a client for detailed view'
-      ) : (
-        <div>
-          {edit === true ? (
-            <form onSubmit={handleSubmit}>
-              <input
-                type="text"
-                name="email"
-                value={client.email}
-                onChange={handleChanges}
-              />
-              <input
-                type="text"
-                name="number"
-                value={client.number}
-                onChange={handleChanges}
-              />
-              <input
-                type="text"
-                name="first_name"
-                value={client.first_name}
-                onChange={handleChanges}
-              />
-              <input
-                type="text"
-                name="last_name"
-                value={client.last_name}
-                onChange={handleChanges}
-              />
-              <button type="submit">Edit Client</button>
-            </form>
-          ) : (
-            <p>{view.number}</p>
-          )}
-          <button onClick={() => editClient(view)}>Edit Client</button>
-          <button onClick={() => deleteClient(view)}>Delete Client</button>
-        </div>
+        <ViewClients viewClient={viewClient} setViewClients={setViewClients} />
       )}
     </div>
   );
