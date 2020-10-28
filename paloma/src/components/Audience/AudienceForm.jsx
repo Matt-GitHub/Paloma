@@ -54,7 +54,7 @@ const AudienceForm = ({ setAddClients }) => {
           name="first_name"
           value={audience.first_name}
           onChange={handleChanges}
-          placeholder={'first name'}
+          placeholder={'First Name'}
         />
         <input
           className="form-input"
@@ -62,7 +62,7 @@ const AudienceForm = ({ setAddClients }) => {
           name="last_name"
           value={audience.last_name}
           onChange={handleChanges}
-          placeholder={'last name'}
+          placeholder={'Last Name'}
         />
         <input
           className="form-input"
@@ -70,7 +70,7 @@ const AudienceForm = ({ setAddClients }) => {
           name="email"
           value={audience.email}
           onChange={handleChanges}
-          placeholder={'email'}
+          placeholder={'Email'}
         />
         <input
           className="form-input"
@@ -78,7 +78,7 @@ const AudienceForm = ({ setAddClients }) => {
           name="location"
           value={audience.location}
           onChange={handleChanges}
-          placeholder={'location'}
+          placeholder={'Location'}
         />
         <div>
           <button type="submit" className="form-button" id="submit">
